@@ -1,0 +1,36 @@
+create database booking_tiket;
+create table user (
+	id_user int(3) not null auto_increment,
+	username varchar(20) not null,
+	pass varchar(20) not null,
+	level varchar(10),
+	primary key (id_user)
+	);
+create table kelas(
+	id_kelas int(4) not null auto_increment,
+	nama_kelas varchar(30),
+	harga int(12) not null
+	);
+create table pesan (
+	id_pesan int(5) not null auto_increment,
+	nama_pemesan varchar(30) not null,
+	alamat text,
+	no_hp varchar(15),
+	id_ka int(4),
+	primary key (id_pesan)
+	);
+create table kereta(
+	id_ka int(4) not null,
+	nama_ka varchar(30),
+	tgl_berangkat date,
+	tgl_tiba date,
+	jam_berangkat varchar(10),
+	jam_tiba varchar(10),
+	dari varchar(30),
+	ke varchar(30),
+	id_kelas int(3),
+	primary key (id_ka)
+	);
+	
+alter table kereta add foreign key(id_kelas) references kelas(id_kelas);
+alter table pesan add foreign key(id_ka) references kereta(id_ka);
